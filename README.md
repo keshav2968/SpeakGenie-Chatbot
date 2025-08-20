@@ -23,7 +23,6 @@ This project is a real-time AI Voice English Tutor built for the SpeakGenie inte
     * **Speech-to-Text:** Browser's Web Speech API
     * **Text-to-Speech:** Browser's Web SpeechSynthesis API
 * **Styling:** Plain CSS
-<<<<<<< HEAD
 
 ---
 
@@ -31,4 +30,4 @@ This project is a real-time AI Voice English Tutor built for the SpeakGenie inte
 
 * **The OpenAI API key has not been uploaded here on GitHub due to obvious reasons, and I could also see that it has been revoked or deemed unusable by SpeakGenie Recruiters. My project will not run properly without a usable OpenAI API Key** 
 =======
->>>>>>> 9dc545da55be3cb450b12cd59b200b2b398a878b
+
