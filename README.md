@@ -29,5 +29,4 @@ This project is a real-time AI Voice English Tutor built for the SpeakGenie inte
 ## Kindly Note 
 
 * **The OpenAI API key has not been uploaded here on GitHub due to obvious reasons, and I could also see that it has been revoked or deemed unusable by SpeakGenie Recruiters. My project will not run properly without a usable OpenAI API Key** 
-=======
 
