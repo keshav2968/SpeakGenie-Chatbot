@@ -1,5 +1,3 @@
-// src/scenarios.js
-
 export const scenarios = [
   {
     id: 'store',

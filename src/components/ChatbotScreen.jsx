@@ -1,3 +1,62 @@
+/**
+ * ChatbotScreen.jsx
+ * 
+ * This component implements an interactive English tutor chatbot for children aged 8-12.
+ * It uses speech recognition for user input and speech synthesis for AI responses.
+ * The AI provides simple, encouraging feedback and grammar tips, and can translate its responses to Hindi.
+ * 
+ * Features:
+ * - Listens to user's speech and transcribes it.
+ * - Sends user input to an AI model with a tutor prompt for a friendly, simple response.
+ * - AI checks user's grammar and provides a speaking tip if needed.
+ * - AI response is spoken aloud using speech synthesis.
+ * - Option to translate AI response to Hindi and speak it.
+ * - Displays chat history with user and AI messages.
+ * 
+ * Dependencies:
+ * - React (useState, useEffect)
+ * - getAIResponse: Function to get AI's response (imported from '../ai')
+ * - translateText: Function to translate text (imported from '../ai')
+ * 
+ * Constants:
+ * @constant {string} TUTOR_PROMPT - Prompt for the AI to act as a friendly English tutor, including instructions for grammar correction and emoji ending.
+ * 
+ * Variables:
+ * @var {SpeechRecognition|null} recognition - Instance of browser's SpeechRecognition API, initialized if available.
+ * 
+ * State:
+ * @state {boolean} isListening - Whether the app is currently listening for user speech.
+ * @state {Array<{sender: string, text: string}>} messages - Array of chat messages between user and AI.
+ * @state {boolean} isResponding - Whether the AI is currently generating a response.
+ * 
+ * Functions:
+ * @function speakText
+ * @description Uses browser speech synthesis to speak a given text aloud.
+ * @param {string} text - The text to be spoken.
+ * 
+ * @function handleUserSpeech
+ * @description Handles the main logic when user speech is transcribed: adds user message, gets AI response, adds AI message, and speaks AI response.
+ * @param {string} transcript - The transcribed user speech.
+ * 
+ * @function handleListen
+ * @description Starts speech recognition and sets listening state.
+ * 
+ * @function handleTranslateAndSpeak
+ * @description Translates given text to Hindi and speaks it aloud.
+ * @param {string} text - The text to translate and speak.
+ * 
+ * useEffect:
+ * - Initializes SpeechRecognition instance and sets up event handlers for result, end, and error.
+ * - Cleans up event handlers and aborts recognition on unmount.
+ * 
+ * Render:
+ * - Displays chat messages with sender distinction.
+ * - Shows a button to translate and speak AI messages in Hindi.
+ * - Shows a loading indicator when AI is responding.
+ * - Provides a button to start listening for user speech.
+ * 
+ * @component
+ */
 import { useState, useEffect } from 'react';
 import { getAIResponse, translateText } from '../ai';
 
@@ -112,13 +171,11 @@ function ChatbotScreen() {
 
   return (
     <div className="chatbot-container">
-      {/* This JSX is fine, but I'll update it to use the new CSS classes from Step 4 for you */}
       <div className="messages-display">
         {messages.map((msg, index) => (
             <div key={index} className={`message-container ${msg.sender}`}>
                 <div className={`message ${msg.sender}`}>
                 {msg.text}
-                {/* Add this button logic for AI messages */}
                 {msg.sender === 'ai' && (
                     <button 
                     onClick={() => handleTranslateAndSpeak(msg.text)} 
@@ -132,7 +189,7 @@ function ChatbotScreen() {
         {isResponding && <div className="loading-indicator">🧠 Thinking...</div>}
       </div>
       <button onClick={handleListen} disabled={isResponding}>
-        {isListening ? '...Listening...' : '🎤 Speak Now'}
+        {isListening ? '...Listening...' : 'Speak Now'}
       </button>
     </div>
   );

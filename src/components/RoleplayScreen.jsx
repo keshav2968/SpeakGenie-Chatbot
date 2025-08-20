@@ -1,10 +1,85 @@
+/**
+ * RoleplayScreen component allows users to select a roleplay scenario and interact with an AI character using speech recognition and text-to-speech.
+ * The AI starts the conversation based on the selected scenario, and the user can reply by speaking.
+ * The conversation is displayed in a chat-like interface.
+ *
+ * State:
+ * - selectedScenario: The currently selected scenario object from the scenarios list, or null if none selected.
+ * - messages: Array of message objects representing the conversation history. Each message has a sender ('user' or 'ai') and text.
+ * - isListening: Boolean indicating if speech recognition is currently active.
+ * - isResponding: Boolean indicating if the AI is generating a response.
+ *
+ * Functions:
+ * - speakText(text): Uses the Web Speech API to speak the given text aloud.
+ * - startConversation(scenario): Initializes a new conversation with the selected scenario, setting the first AI message.
+ * - handleUserSpeech(transcript): Handles the user's spoken input, updates the conversation, and gets the AI's response.
+ * - handleListen(): Toggles speech recognition on or off.
+ *
+ * Effects:
+ * - useEffect: Sets up speech recognition event handlers and re-attaches them when the selected scenario or messages change.
+ *
+ * Render:
+ * - If no scenario is selected, displays a list of available scenarios for the user to choose from.
+ * - If a scenario is selected, displays the conversation, a button to start/stop listening, and a button to go back to scenario selection.
+ */
+
+/**
+ * scenarios
+ * Imported array of scenario objects, each containing:
+ * - id: Unique identifier for the scenario.
+ * - title: Display name of the scenario.
+ * - starter: The initial message from the AI character.
+ * - prompt: Additional prompt/context for the AI.
+ */
+
+/**
+ * getAIResponse
+ * Imported async function that takes the full conversation and scenario prompt,
+ * and returns the AI's next response as a string.
+ */
+
+/**
+ * SpeechRecognition
+ * Web Speech API interface for speech recognition, used to capture user's spoken replies.
+ */
+
+/**
+ * recognition
+ * Instance of SpeechRecognition, configured for English and non-continuous listening.
+ */
+
+/**
+ * speakText
+ * @function
+ * @param {string} text - The text to be spoken aloud using the browser's speech synthesis.
+ */
+
+/**
+ * startConversation
+ * @function
+ * @param {Object} scenario - The scenario object selected by the user.
+ * Initializes the conversation with the scenario's starter message.
+ */
+
+/**
+ * handleUserSpeech
+ * @function
+ * @param {string} transcript - The user's spoken input as text.
+ * Adds the user's message to the conversation, gets the AI's response, and updates the conversation.
+ */
+
+/**
+ * handleListen
+ * @function
+ * Toggles the speech recognition on or off based on the current listening state.
+ */
 // src/components/RoleplayScreen.jsx
 
 import { useState, useEffect } from 'react';
-import { scenarios } from '../scenarios'; // Import our scenarios
-import { getAIResponse } from '../ai'; // Import our reusable AI function
+import { scenarios } from '../scenarios'; 
+import { getAIResponse } from '../ai'; 
 
-// Speech Recognition setup (same as ChatbotScreen)
+
 const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 const recognition = new SpeechRecognition();
 recognition.continuous = false;
@@ -98,7 +173,7 @@ function RoleplayScreen() {
             {isResponding && <p><i>Thinking...</i></p>}
           </div>
           <button onClick={handleListen} disabled={isResponding}>
-            {isListening ? '...Listening...' : '🎤 Speak Your Reply'}
+            {isListening ? '...Listening...' : 'Speak Your Reply'}
           </button>
           <br />
           <button style={{marginTop: '20px'}} onClick={() => setSelectedScenario(null)}>

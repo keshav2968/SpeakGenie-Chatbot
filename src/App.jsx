@@ -4,7 +4,7 @@ import RoleplayScreen from './components/RoleplayScreen';
 import './index.css';
 
 function App() {
-  const [mode, setMode] = useState('chatbot'); // 'chatbot' or 'roleplay'
+  const [mode, setMode] = useState('chatbot');
 
   return (
     <div className="container">

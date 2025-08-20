@@ -1,5 +1,3 @@
-// src/ai.js
-
 import openai from './openai';
 
 export const getAIResponse = async (userMessage, systemPrompt) => {
